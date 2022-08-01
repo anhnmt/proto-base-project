@@ -3,7 +3,7 @@ version: v1
 managed:
   enabled: true
   go_package_prefix:
-    default: github.com/xdorro/base-project-proto/proto-gen-go
+    default: github.com/xdorro/proto-base-project/proto-gen-go
 
 plugins:
   - name: go
