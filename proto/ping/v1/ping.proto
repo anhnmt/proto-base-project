@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package ping.v1;
+
+service PingService {
+  // Ping sends a ping to the server to determine if it's reachable.
+  rpc Ping(PingRequest) returns (PingResponse) {}
+}
+
+message PingRequest {
+  string text = 1;
+}
+
+message PingResponse {
+  string text = 1;
+}
