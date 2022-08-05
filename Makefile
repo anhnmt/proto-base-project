@@ -11,7 +11,7 @@ go.get:
 go.gen: buf.gen
 
 go.tidy:
-	go mod tidy -compat=1.18
+	go mod tidy -compat=1.19
 
 go.test:
 	go test ./...

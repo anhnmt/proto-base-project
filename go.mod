@@ -1,6 +1,6 @@
 module github.com/xdorro/proto-base-project
 
-go 1.18
+go 1.19
 
 require (
 	github.com/bufbuild/connect-go v0.3.0
