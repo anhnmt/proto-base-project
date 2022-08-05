@@ -6,9 +6,22 @@ managed:
     default: github.com/xdorro/proto-base-project/proto-gen-go
 
 plugins:
+  ## connect-go
   - name: go
     out: proto-gen-go
     opt: paths=source_relative
-  - name: connect-go
+  - name: buf.build/bufbuild/plugins/connect-go:v0.3.0-1
     out: proto-gen-go
     opt: paths=source_relative
+
+  ## connect-web
+  - remote: buf.build/bufbuild/plugins/es:v0.0.10-1
+    out: proto-gen-web
+    # With target=ts, we generate TypeScript files.
+    # Use target=js+dts to generate JavaScript and TypeScript declaration files
+    # like remote generation does.
+    opt: target=ts
+  - remote: buf.build/bufbuild/plugins/connect-web:v0.1.0-1
+    out: proto-gen-web
+    # With target=ts, we generate TypeScript files.
+    opt: target=ts
