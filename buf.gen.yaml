@@ -10,7 +10,7 @@ plugins:
   - name: go
     out: proto-gen-go
     opt: paths=source_relative
-  - name: buf.build/bufbuild/plugins/connect-go:v0.3.0-1
+  - remote: buf.build/bufbuild/plugins/connect-go:v0.3.0-1
     out: proto-gen-go
     opt: paths=source_relative
 

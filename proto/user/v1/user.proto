@@ -12,17 +12,21 @@ service UserService {
   rpc FindUserByID (CommonUUIDRequest) returns (User) {}
 
   // Create new User
-  rpc CreateUser (CreateUserRequest) returns (CommonUUIDRequest) {}
+  rpc CreateUser (CreateUserRequest) returns (CommonResponse) {}
 
   // Update User by ID
-  rpc UpdateUser (UpdateUserRequest) returns (CommonUUIDRequest) {}
+  rpc UpdateUser (UpdateUserRequest) returns (CommonResponse) {}
 
   // Delete User
-  rpc DeleteUser (CommonUUIDRequest) returns (CommonUUIDRequest) {}
+  rpc DeleteUser (CommonUUIDRequest) returns (CommonResponse) {}
 }
 
 message CommonUUIDRequest {
   string id = 1;
+}
+
+message CommonResponse {
+  string data = 1;
 }
 
 message User {
@@ -44,8 +48,8 @@ message FindAllUsersRequest {
 }
 
 message FindAllUsersResponse {
-  int64 total_page = 1;
-  int64 current_page = 2;
+  int64 totalPage = 1;
+  int64 currentPage = 2;
   // Users
   repeated User data = 3;
 }

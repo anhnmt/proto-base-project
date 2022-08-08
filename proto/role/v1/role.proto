@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package role.v1;
+
+service RoleService {
+  rpc FindAllRoles (FindAllRolesRequest) returns (FindAllRolesResponse) {}
+
+  // Find Role by ID
+  rpc FindRoleByID (CommonUUIDRequest) returns (Role) {}
+
+  // Create new Role
+  rpc CreateRole (CreateRoleRequest) returns (CommonResponse) {}
+
+  // Update Role by ID
+  rpc UpdateRole (UpdateRoleRequest) returns (CommonResponse) {}
+
+  // Delete Role
+  rpc DeleteRole (CommonUUIDRequest) returns (CommonResponse) {}
+}
+
+message CommonUUIDRequest {
+  string id = 1;
+}
+
+message CommonResponse {
+  string data = 1;
+}
+
+message FindAllRolesRequest {
+  int64 page = 1;
+}
+
+message FindAllRolesResponse {
+  int64 totalPage = 1;
+  int64 currentPage = 2;
+  // Roles
+  repeated Role data = 3;
+}
+
+message Role {
+  // Output only. Id of the role.
+  string id = 1;
+
+  // Output only. Name of the role.
+  string name = 2;
+
+  // Output only. Email of the role.
+  string slug = 3;
+
+  // Output only. isFullAccess of the role.
+  bool isFullAccess = 4;
+
+  // Output only. Status of the role.
+  int32 status = 5;
+}
+
+// The request create new Role
+message CreateRoleRequest {
+  string name = 1;
+
+  string slug = 2;
+
+  int32 status = 3;
+
+  optional bool isFullAccess = 4;
+
+  // List Permissions ID
+  repeated string permissions = 5;
+}
+
+// The request update Role
+message UpdateRoleRequest {
+  string id = 1;
+
+  optional string name = 2;
+
+  optional string slug = 3;
+
+  optional bool isFullAccess = 4;
+
+  optional int32 status = 5;
+
+  // List Permissions ID
+  repeated string permissions = 6;
+}

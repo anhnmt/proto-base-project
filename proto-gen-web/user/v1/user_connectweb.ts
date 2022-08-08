@@ -3,7 +3,7 @@
 /* eslint-disable */
 /* @ts-nocheck */
 
-import {CommonUUIDRequest, CreateUserRequest, FindAllUsersRequest, FindAllUsersResponse, UpdateUserRequest, User} from "./user_pb.js";
+import {CommonResponse, CommonUUIDRequest, CreateUserRequest, FindAllUsersRequest, FindAllUsersResponse, UpdateUserRequest, User} from "./user_pb.js";
 import {MethodKind} from "@bufbuild/protobuf";
 
 /**
@@ -40,7 +40,7 @@ export const UserService = {
     createUser: {
       name: "CreateUser",
       I: CreateUserRequest,
-      O: CommonUUIDRequest,
+      O: CommonResponse,
       kind: MethodKind.Unary,
     },
     /**
@@ -51,7 +51,7 @@ export const UserService = {
     updateUser: {
       name: "UpdateUser",
       I: UpdateUserRequest,
-      O: CommonUUIDRequest,
+      O: CommonResponse,
       kind: MethodKind.Unary,
     },
     /**
@@ -62,7 +62,7 @@ export const UserService = {
     deleteUser: {
       name: "DeleteUser",
       I: CommonUUIDRequest,
-      O: CommonUUIDRequest,
+      O: CommonResponse,
       kind: MethodKind.Unary,
     },
   }

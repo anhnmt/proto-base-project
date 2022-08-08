@@ -44,6 +44,43 @@ export class CommonUUIDRequest extends Message<CommonUUIDRequest> {
 }
 
 /**
+ * @generated from message user.v1.CommonResponse
+ */
+export class CommonResponse extends Message<CommonResponse> {
+  /**
+   * @generated from field: string data = 1;
+   */
+  data = "";
+
+  constructor(data?: PartialMessage<CommonResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "user.v1.CommonResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "data", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CommonResponse {
+    return new CommonResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CommonResponse {
+    return new CommonResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CommonResponse {
+    return new CommonResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: CommonResponse | PlainMessage<CommonResponse> | undefined, b: CommonResponse | PlainMessage<CommonResponse> | undefined): boolean {
+    return proto3.util.equals(CommonResponse, a, b);
+  }
+}
+
+/**
  * @generated from message user.v1.User
  */
 export class User extends Message<User> {
@@ -148,12 +185,12 @@ export class FindAllUsersRequest extends Message<FindAllUsersRequest> {
  */
 export class FindAllUsersResponse extends Message<FindAllUsersResponse> {
   /**
-   * @generated from field: int64 total_page = 1;
+   * @generated from field: int64 totalPage = 1;
    */
   totalPage = protoInt64.zero;
 
   /**
-   * @generated from field: int64 current_page = 2;
+   * @generated from field: int64 currentPage = 2;
    */
   currentPage = protoInt64.zero;
 
@@ -172,8 +209,8 @@ export class FindAllUsersResponse extends Message<FindAllUsersResponse> {
   static readonly runtime = proto3;
   static readonly typeName = "user.v1.FindAllUsersResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "total_page", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 2, name: "current_page", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 1, name: "totalPage", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "currentPage", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 3, name: "data", kind: "message", T: User, repeated: true },
   ]);
 
