@@ -173,32 +173,29 @@ export class FindAllPermissionsResponse extends Message<FindAllPermissionsRespon
  */
 export class Permission extends Message<Permission> {
   /**
-   * Output only. Id of the permission.
-   *
    * @generated from field: string id = 1;
    */
   id = "";
 
   /**
-   * Output only. Name of the permission.
-   *
    * @generated from field: string name = 2;
    */
   name = "";
 
   /**
-   * Output only. Email of the permission.
-   *
    * @generated from field: string slug = 3;
    */
   slug = "";
 
   /**
-   * Output only. Status of the permission.
-   *
-   * @generated from field: int32 status = 4;
+   * @generated from field: bool requireAuth = 4;
    */
-  status = 0;
+  requireAuth = false;
+
+  /**
+   * @generated from field: bool requireHash = 5;
+   */
+  requireHash = false;
 
   constructor(data?: PartialMessage<Permission>) {
     super();
@@ -211,7 +208,8 @@ export class Permission extends Message<Permission> {
     { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "slug", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "status", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 4, name: "requireAuth", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 5, name: "requireHash", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Permission {
@@ -248,9 +246,14 @@ export class CreatePermissionRequest extends Message<CreatePermissionRequest> {
   slug = "";
 
   /**
-   * @generated from field: int32 status = 3;
+   * @generated from field: bool requireAuth = 3;
    */
-  status = 0;
+  requireAuth = false;
+
+  /**
+   * @generated from field: bool requireHash = 4;
+   */
+  requireHash = false;
 
   constructor(data?: PartialMessage<CreatePermissionRequest>) {
     super();
@@ -262,7 +265,8 @@ export class CreatePermissionRequest extends Message<CreatePermissionRequest> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "slug", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "status", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 3, name: "requireAuth", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 4, name: "requireHash", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreatePermissionRequest {
@@ -304,9 +308,14 @@ export class UpdatePermissionRequest extends Message<UpdatePermissionRequest> {
   slug?: string;
 
   /**
-   * @generated from field: optional int32 status = 4;
+   * @generated from field: optional bool requireAuth = 4;
    */
-  status?: number;
+  requireAuth?: boolean;
+
+  /**
+   * @generated from field: optional bool requireHash = 5;
+   */
+  requireHash?: boolean;
 
   constructor(data?: PartialMessage<UpdatePermissionRequest>) {
     super();
@@ -319,7 +328,8 @@ export class UpdatePermissionRequest extends Message<UpdatePermissionRequest> {
     { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 3, name: "slug", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 4, name: "status", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
+    { no: 4, name: "requireAuth", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
+    { no: 5, name: "requireHash", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdatePermissionRequest {
