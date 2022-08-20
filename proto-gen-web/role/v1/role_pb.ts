@@ -4,42 +4,42 @@
 /* @ts-nocheck */
 
 import type {BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage} from "@bufbuild/protobuf";
-import {Message, proto3, protoInt64} from "@bufbuild/protobuf";
+import {Message, proto3} from "@bufbuild/protobuf";
 
 /**
- * @generated from message role.v1.CommonUUIDRequest
+ * @generated from message role.v1.CommonNameRequest
  */
-export class CommonUUIDRequest extends Message<CommonUUIDRequest> {
+export class CommonNameRequest extends Message<CommonNameRequest> {
   /**
-   * @generated from field: string id = 1;
+   * @generated from field: string name = 1;
    */
-  id = "";
+  name = "";
 
-  constructor(data?: PartialMessage<CommonUUIDRequest>) {
+  constructor(data?: PartialMessage<CommonNameRequest>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
   static readonly runtime = proto3;
-  static readonly typeName = "role.v1.CommonUUIDRequest";
+  static readonly typeName = "role.v1.CommonNameRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CommonUUIDRequest {
-    return new CommonUUIDRequest().fromBinary(bytes, options);
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CommonNameRequest {
+    return new CommonNameRequest().fromBinary(bytes, options);
   }
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CommonUUIDRequest {
-    return new CommonUUIDRequest().fromJson(jsonValue, options);
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CommonNameRequest {
+    return new CommonNameRequest().fromJson(jsonValue, options);
   }
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CommonUUIDRequest {
-    return new CommonUUIDRequest().fromJsonString(jsonString, options);
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CommonNameRequest {
+    return new CommonNameRequest().fromJsonString(jsonString, options);
   }
 
-  static equals(a: CommonUUIDRequest | PlainMessage<CommonUUIDRequest> | undefined, b: CommonUUIDRequest | PlainMessage<CommonUUIDRequest> | undefined): boolean {
-    return proto3.util.equals(CommonUUIDRequest, a, b);
+  static equals(a: CommonNameRequest | PlainMessage<CommonNameRequest> | undefined, b: CommonNameRequest | PlainMessage<CommonNameRequest> | undefined): boolean {
+    return proto3.util.equals(CommonNameRequest, a, b);
   }
 }
 
@@ -84,11 +84,6 @@ export class CommonResponse extends Message<CommonResponse> {
  * @generated from message role.v1.FindAllRolesRequest
  */
 export class FindAllRolesRequest extends Message<FindAllRolesRequest> {
-  /**
-   * @generated from field: int64 page = 1;
-   */
-  page = protoInt64.zero;
-
   constructor(data?: PartialMessage<FindAllRolesRequest>) {
     super();
     proto3.util.initPartial(data, this);
@@ -97,7 +92,6 @@ export class FindAllRolesRequest extends Message<FindAllRolesRequest> {
   static readonly runtime = proto3;
   static readonly typeName = "role.v1.FindAllRolesRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "page", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): FindAllRolesRequest {
@@ -122,16 +116,6 @@ export class FindAllRolesRequest extends Message<FindAllRolesRequest> {
  */
 export class FindAllRolesResponse extends Message<FindAllRolesResponse> {
   /**
-   * @generated from field: int64 totalPage = 1;
-   */
-  totalPage = protoInt64.zero;
-
-  /**
-   * @generated from field: int64 currentPage = 2;
-   */
-  currentPage = protoInt64.zero;
-
-  /**
    * Roles
    *
    * @generated from field: repeated role.v1.Role data = 3;
@@ -146,8 +130,6 @@ export class FindAllRolesResponse extends Message<FindAllRolesResponse> {
   static readonly runtime = proto3;
   static readonly typeName = "role.v1.FindAllRolesResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "totalPage", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 2, name: "currentPage", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 3, name: "data", kind: "message", T: Role, repeated: true },
   ]);
 
@@ -173,39 +155,16 @@ export class FindAllRolesResponse extends Message<FindAllRolesResponse> {
  */
 export class Role extends Message<Role> {
   /**
-   * Output only. Id of the role.
-   *
-   * @generated from field: string id = 1;
-   */
-  id = "";
-
-  /**
    * Output only. Name of the role.
    *
-   * @generated from field: string name = 2;
+   * @generated from field: string name = 1;
    */
   name = "";
 
   /**
-   * Output only. Email of the role.
-   *
-   * @generated from field: string slug = 3;
+   * @generated from field: repeated string permissions = 2;
    */
-  slug = "";
-
-  /**
-   * Output only. isFullAccess of the role.
-   *
-   * @generated from field: bool isFullAccess = 4;
-   */
-  isFullAccess = false;
-
-  /**
-   * Output only. Status of the role.
-   *
-   * @generated from field: int32 status = 5;
-   */
-  status = 0;
+  permissions: string[] = [];
 
   constructor(data?: PartialMessage<Role>) {
     super();
@@ -215,11 +174,8 @@ export class Role extends Message<Role> {
   static readonly runtime = proto3;
   static readonly typeName = "role.v1.Role";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "slug", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "isFullAccess", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 5, name: "status", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "permissions", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Role {
@@ -251,24 +207,9 @@ export class CreateRoleRequest extends Message<CreateRoleRequest> {
   name = "";
 
   /**
-   * @generated from field: string slug = 2;
-   */
-  slug = "";
-
-  /**
-   * @generated from field: int32 status = 3;
-   */
-  status = 0;
-
-  /**
-   * @generated from field: optional bool isFullAccess = 4;
-   */
-  isFullAccess?: boolean;
-
-  /**
    * List Permissions ID
    *
-   * @generated from field: repeated string permissions = 5;
+   * @generated from field: repeated string permissions = 2;
    */
   permissions: string[] = [];
 
@@ -281,10 +222,7 @@ export class CreateRoleRequest extends Message<CreateRoleRequest> {
   static readonly typeName = "role.v1.CreateRoleRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "slug", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "status", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 4, name: "isFullAccess", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
-    { no: 5, name: "permissions", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 2, name: "permissions", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateRoleRequest {
@@ -311,34 +249,14 @@ export class CreateRoleRequest extends Message<CreateRoleRequest> {
  */
 export class UpdateRoleRequest extends Message<UpdateRoleRequest> {
   /**
-   * @generated from field: string id = 1;
+   * @generated from field: string name = 1;
    */
-  id = "";
-
-  /**
-   * @generated from field: optional string name = 2;
-   */
-  name?: string;
-
-  /**
-   * @generated from field: optional string slug = 3;
-   */
-  slug?: string;
-
-  /**
-   * @generated from field: optional bool isFullAccess = 4;
-   */
-  isFullAccess?: boolean;
-
-  /**
-   * @generated from field: optional int32 status = 5;
-   */
-  status?: number;
+  name = "";
 
   /**
    * List Permissions ID
    *
-   * @generated from field: repeated string permissions = 6;
+   * @generated from field: repeated string permissions = 2;
    */
   permissions: string[] = [];
 
@@ -350,12 +268,8 @@ export class UpdateRoleRequest extends Message<UpdateRoleRequest> {
   static readonly runtime = proto3;
   static readonly typeName = "role.v1.UpdateRoleRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 3, name: "slug", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 4, name: "isFullAccess", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
-    { no: 5, name: "status", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
-    { no: 6, name: "permissions", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "permissions", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateRoleRequest {

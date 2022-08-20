@@ -3,7 +3,7 @@
 /* eslint-disable */
 /* @ts-nocheck */
 
-import {CommonResponse, CommonUUIDRequest, CreateRoleRequest, FindAllRolesRequest, FindAllRolesResponse, Role, UpdateRoleRequest} from "./role_pb.js";
+import {CommonNameRequest, CommonResponse, CreateRoleRequest, FindAllRolesRequest, FindAllRolesResponse, Role, UpdateRoleRequest} from "./role_pb.js";
 import {MethodKind} from "@bufbuild/protobuf";
 
 /**
@@ -22,13 +22,13 @@ export const RoleService = {
       kind: MethodKind.Unary,
     },
     /**
-     * Find Role by ID
+     * Find Role by Name
      *
-     * @generated from rpc role.v1.RoleService.FindRoleByID
+     * @generated from rpc role.v1.RoleService.FindRoleByName
      */
-    findRoleByID: {
-      name: "FindRoleByID",
-      I: CommonUUIDRequest,
+    findRoleByName: {
+      name: "FindRoleByName",
+      I: CommonNameRequest,
       O: Role,
       kind: MethodKind.Unary,
     },
@@ -61,7 +61,7 @@ export const RoleService = {
      */
     deleteRole: {
       name: "DeleteRole",
-      I: CommonUUIDRequest,
+      I: CommonNameRequest,
       O: CommonResponse,
       kind: MethodKind.Unary,
     },

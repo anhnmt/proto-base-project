@@ -28,14 +28,14 @@ const (
 // RoleServiceClient is a client for the role.v1.RoleService service.
 type RoleServiceClient interface {
 	FindAllRoles(context.Context, *connect_go.Request[v1.FindAllRolesRequest]) (*connect_go.Response[v1.FindAllRolesResponse], error)
-	// Find Role by ID
-	FindRoleByID(context.Context, *connect_go.Request[v1.CommonUUIDRequest]) (*connect_go.Response[v1.Role], error)
+	// Find Role by Name
+	FindRoleByName(context.Context, *connect_go.Request[v1.CommonNameRequest]) (*connect_go.Response[v1.Role], error)
 	// Create new Role
 	CreateRole(context.Context, *connect_go.Request[v1.CreateRoleRequest]) (*connect_go.Response[v1.CommonResponse], error)
 	// Update Role by ID
 	UpdateRole(context.Context, *connect_go.Request[v1.UpdateRoleRequest]) (*connect_go.Response[v1.CommonResponse], error)
 	// Delete Role
-	DeleteRole(context.Context, *connect_go.Request[v1.CommonUUIDRequest]) (*connect_go.Response[v1.CommonResponse], error)
+	DeleteRole(context.Context, *connect_go.Request[v1.CommonNameRequest]) (*connect_go.Response[v1.CommonResponse], error)
 }
 
 // NewRoleServiceClient constructs a client for the role.v1.RoleService service. By default, it uses
@@ -53,9 +53,9 @@ func NewRoleServiceClient(httpClient connect_go.HTTPClient, baseURL string, opts
 			baseURL+"/role.v1.RoleService/FindAllRoles",
 			opts...,
 		),
-		findRoleByID: connect_go.NewClient[v1.CommonUUIDRequest, v1.Role](
+		findRoleByName: connect_go.NewClient[v1.CommonNameRequest, v1.Role](
 			httpClient,
-			baseURL+"/role.v1.RoleService/FindRoleByID",
+			baseURL+"/role.v1.RoleService/FindRoleByName",
 			opts...,
 		),
 		createRole: connect_go.NewClient[v1.CreateRoleRequest, v1.CommonResponse](
@@ -68,7 +68,7 @@ func NewRoleServiceClient(httpClient connect_go.HTTPClient, baseURL string, opts
 			baseURL+"/role.v1.RoleService/UpdateRole",
 			opts...,
 		),
-		deleteRole: connect_go.NewClient[v1.CommonUUIDRequest, v1.CommonResponse](
+		deleteRole: connect_go.NewClient[v1.CommonNameRequest, v1.CommonResponse](
 			httpClient,
 			baseURL+"/role.v1.RoleService/DeleteRole",
 			opts...,
@@ -78,11 +78,11 @@ func NewRoleServiceClient(httpClient connect_go.HTTPClient, baseURL string, opts
 
 // roleServiceClient implements RoleServiceClient.
 type roleServiceClient struct {
-	findAllRoles *connect_go.Client[v1.FindAllRolesRequest, v1.FindAllRolesResponse]
-	findRoleByID *connect_go.Client[v1.CommonUUIDRequest, v1.Role]
-	createRole   *connect_go.Client[v1.CreateRoleRequest, v1.CommonResponse]
-	updateRole   *connect_go.Client[v1.UpdateRoleRequest, v1.CommonResponse]
-	deleteRole   *connect_go.Client[v1.CommonUUIDRequest, v1.CommonResponse]
+	findAllRoles   *connect_go.Client[v1.FindAllRolesRequest, v1.FindAllRolesResponse]
+	findRoleByName *connect_go.Client[v1.CommonNameRequest, v1.Role]
+	createRole     *connect_go.Client[v1.CreateRoleRequest, v1.CommonResponse]
+	updateRole     *connect_go.Client[v1.UpdateRoleRequest, v1.CommonResponse]
+	deleteRole     *connect_go.Client[v1.CommonNameRequest, v1.CommonResponse]
 }
 
 // FindAllRoles calls role.v1.RoleService.FindAllRoles.
@@ -90,9 +90,9 @@ func (c *roleServiceClient) FindAllRoles(ctx context.Context, req *connect_go.Re
 	return c.findAllRoles.CallUnary(ctx, req)
 }
 
-// FindRoleByID calls role.v1.RoleService.FindRoleByID.
-func (c *roleServiceClient) FindRoleByID(ctx context.Context, req *connect_go.Request[v1.CommonUUIDRequest]) (*connect_go.Response[v1.Role], error) {
-	return c.findRoleByID.CallUnary(ctx, req)
+// FindRoleByName calls role.v1.RoleService.FindRoleByName.
+func (c *roleServiceClient) FindRoleByName(ctx context.Context, req *connect_go.Request[v1.CommonNameRequest]) (*connect_go.Response[v1.Role], error) {
+	return c.findRoleByName.CallUnary(ctx, req)
 }
 
 // CreateRole calls role.v1.RoleService.CreateRole.
@@ -106,21 +106,21 @@ func (c *roleServiceClient) UpdateRole(ctx context.Context, req *connect_go.Requ
 }
 
 // DeleteRole calls role.v1.RoleService.DeleteRole.
-func (c *roleServiceClient) DeleteRole(ctx context.Context, req *connect_go.Request[v1.CommonUUIDRequest]) (*connect_go.Response[v1.CommonResponse], error) {
+func (c *roleServiceClient) DeleteRole(ctx context.Context, req *connect_go.Request[v1.CommonNameRequest]) (*connect_go.Response[v1.CommonResponse], error) {
 	return c.deleteRole.CallUnary(ctx, req)
 }
 
 // RoleServiceHandler is an implementation of the role.v1.RoleService service.
 type RoleServiceHandler interface {
 	FindAllRoles(context.Context, *connect_go.Request[v1.FindAllRolesRequest]) (*connect_go.Response[v1.FindAllRolesResponse], error)
-	// Find Role by ID
-	FindRoleByID(context.Context, *connect_go.Request[v1.CommonUUIDRequest]) (*connect_go.Response[v1.Role], error)
+	// Find Role by Name
+	FindRoleByName(context.Context, *connect_go.Request[v1.CommonNameRequest]) (*connect_go.Response[v1.Role], error)
 	// Create new Role
 	CreateRole(context.Context, *connect_go.Request[v1.CreateRoleRequest]) (*connect_go.Response[v1.CommonResponse], error)
 	// Update Role by ID
 	UpdateRole(context.Context, *connect_go.Request[v1.UpdateRoleRequest]) (*connect_go.Response[v1.CommonResponse], error)
 	// Delete Role
-	DeleteRole(context.Context, *connect_go.Request[v1.CommonUUIDRequest]) (*connect_go.Response[v1.CommonResponse], error)
+	DeleteRole(context.Context, *connect_go.Request[v1.CommonNameRequest]) (*connect_go.Response[v1.CommonResponse], error)
 }
 
 // NewRoleServiceHandler builds an HTTP handler from the service implementation. It returns the path
@@ -135,9 +135,9 @@ func NewRoleServiceHandler(svc RoleServiceHandler, opts ...connect_go.HandlerOpt
 		svc.FindAllRoles,
 		opts...,
 	))
-	mux.Handle("/role.v1.RoleService/FindRoleByID", connect_go.NewUnaryHandler(
-		"/role.v1.RoleService/FindRoleByID",
-		svc.FindRoleByID,
+	mux.Handle("/role.v1.RoleService/FindRoleByName", connect_go.NewUnaryHandler(
+		"/role.v1.RoleService/FindRoleByName",
+		svc.FindRoleByName,
 		opts...,
 	))
 	mux.Handle("/role.v1.RoleService/CreateRole", connect_go.NewUnaryHandler(
@@ -165,8 +165,8 @@ func (UnimplementedRoleServiceHandler) FindAllRoles(context.Context, *connect_go
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("role.v1.RoleService.FindAllRoles is not implemented"))
 }
 
-func (UnimplementedRoleServiceHandler) FindRoleByID(context.Context, *connect_go.Request[v1.CommonUUIDRequest]) (*connect_go.Response[v1.Role], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("role.v1.RoleService.FindRoleByID is not implemented"))
+func (UnimplementedRoleServiceHandler) FindRoleByName(context.Context, *connect_go.Request[v1.CommonNameRequest]) (*connect_go.Response[v1.Role], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("role.v1.RoleService.FindRoleByName is not implemented"))
 }
 
 func (UnimplementedRoleServiceHandler) CreateRole(context.Context, *connect_go.Request[v1.CreateRoleRequest]) (*connect_go.Response[v1.CommonResponse], error) {
@@ -177,6 +177,6 @@ func (UnimplementedRoleServiceHandler) UpdateRole(context.Context, *connect_go.R
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("role.v1.RoleService.UpdateRole is not implemented"))
 }
 
-func (UnimplementedRoleServiceHandler) DeleteRole(context.Context, *connect_go.Request[v1.CommonUUIDRequest]) (*connect_go.Response[v1.CommonResponse], error) {
+func (UnimplementedRoleServiceHandler) DeleteRole(context.Context, *connect_go.Request[v1.CommonNameRequest]) (*connect_go.Response[v1.CommonResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("role.v1.RoleService.DeleteRole is not implemented"))
 }
