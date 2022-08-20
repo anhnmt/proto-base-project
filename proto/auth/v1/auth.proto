@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package auth.v1;
+
+service AuthService {
+  rpc Login (LoginRequest) returns (TokenResponse) {}
+
+  rpc RevokeToken (TokenRequest) returns (CommonResponse) {}
+
+  rpc RefreshToken (TokenRequest) returns (TokenResponse) {}
+}
+
+message CommonResponse {
+  string token = 1;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message TokenResponse {
+  string token_type = 1;
+  string access_token = 2;
+  int64 access_expire = 3;
+  string refresh_token = 4;
+  int64 refresh_expire = 5;
+}
+
+message TokenRequest {
+  string token = 1;
+}

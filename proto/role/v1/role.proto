@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package role.v1;
+
+service RoleService {
+  rpc FindAllRoles (FindAllRolesRequest) returns (FindAllRolesResponse) {}
+
+  // Find Role by Name
+  rpc FindRoleByName (CommonNameRequest) returns (Role) {}
+
+  // Create new Role
+  rpc CreateRole (CreateRoleRequest) returns (CommonResponse) {}
+
+  // Update Role by ID
+  rpc UpdateRole (UpdateRoleRequest) returns (CommonResponse) {}
+
+  // Delete Role
+  rpc DeleteRole (CommonNameRequest) returns (CommonResponse) {}
+}
+
+message CommonNameRequest {
+  string name = 1;
+}
+
+message CommonResponse {
+  string data = 1;
+}
+
+message FindAllRolesRequest {}
+
+message FindAllRolesResponse {
+  // Roles
+  repeated Role data = 3;
+}
+
+message Role {
+  // Output only. Name of the role.
+  string name = 1;
+
+  repeated string permissions = 2;
+}
+
+// The request create new Role
+message CreateRoleRequest {
+  string name = 1;
+
+  // List Permissions ID
+  repeated string permissions = 2;
+}
+
+// The request update Role
+message UpdateRoleRequest {
+  string name = 1;
+
+  // List Permissions ID
+  repeated string permissions = 2;
+}
