@@ -85,30 +85,27 @@ export class CommonResponse extends Message<CommonResponse> {
  */
 export class User extends Message<User> {
   /**
-   * Output only. Id of the user.
-   *
    * @generated from field: string id = 1;
    */
   id = "";
 
   /**
-   * Output only. Name of the user.
-   *
    * @generated from field: string name = 2;
    */
   name = "";
 
   /**
-   * Output only. Email of the user.
-   *
    * @generated from field: string email = 3;
    */
   email = "";
 
   /**
-   * Output only. Status of the user.
-   *
-   * @generated from field: int64 status = 4;
+   * @generated from field: string role = 4;
+   */
+  role = "";
+
+  /**
+   * @generated from field: int64 status = 5;
    */
   status = protoInt64.zero;
 
@@ -123,7 +120,8 @@ export class User extends Message<User> {
     { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "email", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "status", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 4, name: "role", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "status", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): User {
@@ -253,14 +251,14 @@ export class CreateUserRequest extends Message<CreateUserRequest> {
   password = "";
 
   /**
-   * @generated from field: int64 status = 4;
-   */
-  status = protoInt64.zero;
-
-  /**
-   * @generated from field: string role = 5;
+   * @generated from field: string role = 4;
    */
   role = "";
+
+  /**
+   * @generated from field: int64 status = 5;
+   */
+  status = protoInt64.zero;
 
   constructor(data?: PartialMessage<CreateUserRequest>) {
     super();
@@ -273,8 +271,8 @@ export class CreateUserRequest extends Message<CreateUserRequest> {
     { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "email", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "password", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "status", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 5, name: "role", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "role", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "status", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateUserRequest {
@@ -316,14 +314,14 @@ export class UpdateUserRequest extends Message<UpdateUserRequest> {
   email?: string;
 
   /**
-   * @generated from field: optional int64 status = 4;
-   */
-  status?: bigint;
-
-  /**
-   * @generated from field: optional string role = 5;
+   * @generated from field: optional string role = 4;
    */
   role?: string;
+
+  /**
+   * @generated from field: optional int64 status = 5;
+   */
+  status?: bigint;
 
   constructor(data?: PartialMessage<UpdateUserRequest>) {
     super();
@@ -336,8 +334,8 @@ export class UpdateUserRequest extends Message<UpdateUserRequest> {
     { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 3, name: "email", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 4, name: "status", kind: "scalar", T: 3 /* ScalarType.INT64 */, opt: true },
-    { no: 5, name: "role", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 4, name: "role", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 5, name: "status", kind: "scalar", T: 3 /* ScalarType.INT64 */, opt: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateUserRequest {
