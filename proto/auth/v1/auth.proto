@@ -2,12 +2,29 @@ syntax = "proto3";
 
 package auth.v1;
 
+import "google/api/annotations.proto";
+
 service AuthService {
-  rpc Login (LoginRequest) returns (TokenResponse) {}
+  rpc Login (LoginRequest) returns (TokenResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/auth/token"
+      body: "*"
+    };
+  }
 
-  rpc RevokeToken (TokenRequest) returns (CommonResponse) {}
+  rpc RevokeToken (TokenRequest) returns (CommonResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/auth/revokeToken"
+      body: "*"
+    };
+  }
 
-  rpc RefreshToken (TokenRequest) returns (TokenResponse) {}
+  rpc RefreshToken (TokenRequest) returns (TokenResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/auth/refreshToken"
+      body: "*"
+    };
+  }
 }
 
 message CommonResponse {

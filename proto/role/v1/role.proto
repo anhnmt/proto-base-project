@@ -2,20 +2,44 @@ syntax = "proto3";
 
 package role.v1;
 
+import "google/api/annotations.proto";
+
 service RoleService {
-  rpc FindAllRoles (FindAllRolesRequest) returns (FindAllRolesResponse) {}
+  rpc FindAllRoles (FindAllRolesRequest) returns (FindAllRolesResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/roles"
+    };
+  }
 
   // Find Role by Name
-  rpc FindRoleByName (CommonNameRequest) returns (Role) {}
+  rpc FindRoleByName (CommonNameRequest) returns (Role) {
+    option (google.api.http) = {
+      get: "/api/v1/roles/{name}"
+    };
+  }
 
   // Create new Role
-  rpc CreateRole (CreateRoleRequest) returns (CommonResponse) {}
+  rpc CreateRole (CreateRoleRequest) returns (CommonResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/roles"
+      body: "*"
+    };
+  }
 
   // Update Role by ID
-  rpc UpdateRole (UpdateRoleRequest) returns (CommonResponse) {}
+  rpc UpdateRole (UpdateRoleRequest) returns (CommonResponse) {
+    option (google.api.http) = {
+      put: "/api/v1/roles/{name}"
+      body: "*"
+    };
+  }
 
   // Delete Role
-  rpc DeleteRole (CommonNameRequest) returns (CommonResponse) {}
+  rpc DeleteRole (CommonNameRequest) returns (CommonResponse) {
+    option (google.api.http) = {
+      delete: "/api/v1/roles/{name}"
+    };
+  }
 }
 
 message CommonNameRequest {

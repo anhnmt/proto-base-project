@@ -2,21 +2,45 @@ syntax = "proto3";
 
 package permission.v1;
 
+import "google/api/annotations.proto";
+
 service PermissionService {
   // Find all Permissions
-  rpc FindAllPermissions (FindAllPermissionsRequest) returns (FindAllPermissionsResponse) {}
+  rpc FindAllPermissions (FindAllPermissionsRequest) returns (FindAllPermissionsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/permissions"
+    };
+  }
 
   // Find Permission by ID
-  rpc FindPermissionByID (CommonUUIDRequest) returns (Permission) {}
+  rpc FindPermissionByID (CommonUUIDRequest) returns (Permission) {
+    option (google.api.http) = {
+      get: "/api/v1/permissions/{id}"
+    };
+  }
 
   // Create new Permission
-  rpc CreatePermission (CreatePermissionRequest) returns (CommonResponse) {}
+  rpc CreatePermission (CreatePermissionRequest) returns (CommonResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/permissions"
+      body: "*"
+    };
+  }
 
   // Update Permission by ID
-  rpc UpdatePermission (UpdatePermissionRequest) returns (CommonResponse) {}
+  rpc UpdatePermission (UpdatePermissionRequest) returns (CommonResponse) {
+    option (google.api.http) = {
+      put: "/api/v1/permissions/{id}"
+      body: "*"
+    };
+  }
 
   // Delete Permission
-  rpc DeletePermission (CommonUUIDRequest) returns (CommonResponse) {}
+  rpc DeletePermission (CommonUUIDRequest) returns (CommonResponse) {
+    option (google.api.http) = {
+      delete: "/api/v1/permissions/{id}"
+    };
+  }
 }
 
 message CommonUUIDRequest {
